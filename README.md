@@ -4,6 +4,8 @@ In order to create infrastrucutre execute these commands
 
 # terraform init
 
+Provide AWS access key and secret access key in folder aws_cred file cred
+
 # terrafrom plan (Not mandatory)
 
 # terraform apply
