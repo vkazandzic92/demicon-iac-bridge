@@ -1,0 +1,9 @@
+[default]
+region = eu-central-1
+output = text
+[profile pr-admin]
+sso_region = eu-central-1
+sso_account_id = 210882670059
+sso_role_name = AdministratorAccess
+region = eu-central-1
+output = json
