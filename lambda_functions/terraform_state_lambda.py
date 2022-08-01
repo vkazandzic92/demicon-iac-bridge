@@ -5,22 +5,21 @@ s3_client = boto3.client("s3")
 
 
 def lambda_handler(event, context):
-    object_key = os.environ['object_key']
-    bucket = os.environ['bucket']
     try:
+        object_key = os.environ['object_key']
+        bucket = os.environ['bucket']
+        request = event['Records'][0]['cf']['request']
         file_content = s3_client.get_object(
             Bucket=bucket, Key=object_key)["Body"].read()
 
         state_dict = json.loads(file_content)
         state_output_value = state_dict['outputs']
 
-        if 'queryStringParameters' in event:
-            requested_output = event['queryStringParameters']
-            value_to_search = state_output_value[requested_output]
-
+        if 'query_string' in request:
+            query_string = request['query_string']
             return {
                 "statusCode": 200,
-                "body": {value_to_search: state_output_value[value_to_search]},
+                "body": state_output_value[query_string],
                 "headers": {
                     "Content-Type": "application/json"
                 }
