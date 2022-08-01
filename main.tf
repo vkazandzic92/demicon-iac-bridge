@@ -67,9 +67,7 @@ data "aws_iam_policy_document" "lambda_s3_access_document" {
     resources = [
       "arn:aws:s3:::demicon-terraform-state/*",
     ]
-  }
 }
-
 resource "aws_lambda_function" "lambda" {
   function_name = "terraform_state_lambda"
 
